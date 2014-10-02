@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>Stack Demo</title>
+	<link rel="stylesheet" type="text/css" href="bootstrap.css">
+	<script src="stack.js"></script>
+	<style>
+		.stackWrap {
+			margin: 50px 0 0;
+		}
+		.stackWrap li {
+			background: #bbb;
+			color: #ffffff;
+			padding: 10px;
+			border-radius: 10px;
+			margin: 0 0 10px;
+		}
+		.hero-unit {
+			padding: 20px;
+		}
+	</style>
+</head>
+<body>
+<div class="container">
+	<div class="row">
+		<div class="span12">
+			<div class="hero-unit">
+              <h3>Stack Demo! (^o^)</h3>
+              <p>This is a simple hero unit, a simple jumbotron-style component for calling extra attention to featured content or information.</p>
+            </div>
+		</div>
+	</div>
+	<div class="row">
+		<div class="span6">
+			<h3>Add String to <i>Stack</i></h3>
+			<div class="row">
+				<div class="span3">
+					<input type="text" class="input-block-level" id="pushInput">
+					<button class="btn btn-primary" id="push">Push</button>
+				</div>
+			</div>
+			<h3>Remove element from <i>Stack</i></h3>
+			<div class="row">
+				<div class="span3">
+					<button class="btn btn-danger" id="pop">Pop</button>
+				</div>
+			</div>
+		</div>
+		<div class="span6">
+			<ol class="stackWrap" id="stackWrap">
+			</ol>
+		</div>
+	</div>
+</div>
+<script>
+	var myStack = new Stack("string");
+
+	var pushBtn = document.getElementById("push");
+	var inputVal = document.getElementById("pushInput");
+	var stackWrap = document.getElementById("stackWrap");
+
+	pushBtn.addEventListener("click",function(){
+		if (inputVal.value.length > 0 ) {
+			myStack.push(inputVal.value);
+			var el =  document.createElement("li")
+			el.innerHTML = inputVal.value;
+			stackWrap.insertBefore( el, stackWrap.firstChild );
+			inputVal.value = "";
+		} else {
+			alert("You have not entered anything!")
+		}
+	});
+
+	var popBtn = document.getElementById("pop");
+	popBtn.addEventListener("click",function(){
+		if ( myStack.length > 0 ) {
+			myStack.pop();
+			stackWrap.firstChild.remove();
+		} else {
+			alert("Stack is empty");
+		}
+	});
+</script>
+</body>
+</html>
